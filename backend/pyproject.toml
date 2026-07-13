@@ -1,0 +1,5 @@
+[project]
+name = "khushtrology-backend"
+version = "0.1.0"
+description = "Khushtrology FastAPI backend"
+requires-python = ">=3.12"

@@ -1,0 +1,25 @@
+{
+  "pkg": "khushtrology-frontend",
+  "globalName": "Khushtrology",
+  "projectId": "52bb391f-ff69-4118-950b-2a96625381bc",
+  "shape": "package",
+  "srcDir": "src/components",
+  "cssEntry": "dist/styles.css",
+  "componentSrcMap": {
+    "ConstellationBackground": "src/components/ConstellationBackground.jsx",
+    "ConstellationLoader": "src/components/ConstellationLoader.jsx",
+    "Footer": "src/components/Footer.jsx",
+    "Navbar": "src/components/Navbar.jsx",
+    "PageTransition": "src/components/PageTransition.jsx",
+    "StarField": "src/components/StarField.jsx",
+    "StarLogo": "src/components/StarLogo.jsx",
+    "ZodiacWheel": "src/components/ZodiacWheel.jsx",
+    "MemoryRouter": null
+  },
+  "overrides": {
+    "Navbar": { "cardMode": "single", "primaryStory": "Default" },
+    "ZodiacWheel": { "cardMode": "column" }
+  },
+  "readmeHeader": ".design-sync/conventions.md",
+  "buildCmd": "cd frontend && npx tailwindcss -i src/index.css -o dist/styles.css --minify"
+}

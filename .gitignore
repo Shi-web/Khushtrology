@@ -1,0 +1,53 @@
+# Dependencies
+node_modules/
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# Build output
+dist/
+build/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Editor
+.DS_Store
+.vscode/
+.idea/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Swiss Ephemeris data (download separately)
+backend/ephe/
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Internal docs — keep local, don't publish
+CLAUDE.md
+DEVELOPERS.md
+TODO.md
+Deployment.md
+backend/SCHEMA.sql
+
+# Claude Code — local settings and cached agent skills
+.claude/settings.local.json
+.claude/skills/
+.agents/
+skills-lock.json
+
+# Design sync — generated/machine state (durable set in .design-sync/ IS committed)
+.ds-sync/
+ds-bundle/
+.design-sync/.cache/
+.design-sync/learnings/
+.design-sync/node_modules

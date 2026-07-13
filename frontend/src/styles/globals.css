@@ -1,0 +1,445 @@
+/* ═══════════════════════════════════════════════════════════════
+   Khushtrology — Design System
+   Antiquarian celestial aesthetic. No glassmorphism. No pill buttons.
+═══════════════════════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=IM+Fell+English:ital@0;1&family=Playfair+Display+SC:ital,wght@0,400;0,700;1,400&display=swap');
+
+
+/* ── Tokens ──────────────────────────────────────────────────── */
+:root {
+  --color-void:       #1a0f3c;
+  --color-void-deep:  #0f0922;
+  --color-parchment:  #e8dcc8;
+  --color-parchment-dark: #d4c4a8;
+  --color-rose:       #c4847a;
+  --color-verdigris:  #4a9b8e;
+  --color-gold:       #d4a843;
+  --color-gold-pale:  #e8c87a;
+  --color-ink:        #2c1810;
+  --color-ink-light:  #4a3020;
+
+  /* kept for Tailwind/component backward-compat */
+  --color-bg:       var(--color-void);
+  --color-surface:  #1e1148;
+  --color-border:   rgba(212, 168, 67, 0.2);
+  --color-purple:   var(--color-verdigris);
+  --color-text:     #d8cfc4;
+  --color-muted:    #8a7f74;
+
+  --font-display:   'Playfair Display SC', Georgia, serif;
+  --font-body:      'IM Fell English', Georgia, serif;
+  --font-label:     'Cormorant Garamond', Georgia, serif;
+}
+
+
+/* ── Reset & Base ────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.8;
+  background-color: var(--color-void);
+  color: var(--color-text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Grain texture overlay — 4% opacity SVG noise over entire viewport */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  pointer-events: none;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 300px 300px;
+}
+
+
+/* ── Typography ──────────────────────────────────────────────── */
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+p, li, blockquote {
+  font-family: var(--font-body);
+  line-height: 1.8;
+}
+
+label,
+.label,
+nav a,
+.nav-link,
+.caption {
+  font-family: var(--font-label);
+  font-variant: small-caps;
+  letter-spacing: 0.08em;
+}
+
+/* Tailwind serif override */
+.font-serif { font-family: var(--font-display); }
+
+/* Gold gradient text */
+.gold-text {
+  background: linear-gradient(135deg, var(--color-gold-pale) 0%, var(--color-gold) 55%, #a87828 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+
+/* ── Scrollbar ───────────────────────────────────────────────── */
+::-webkit-scrollbar       { width: 5px; }
+::-webkit-scrollbar-track { background: var(--color-void-deep); }
+::-webkit-scrollbar-thumb { background: rgba(212, 168, 67, 0.35); border-radius: 2px; }
+
+
+/* ── Star canvas (StarField component) ──────────────────────── */
+.star-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+
+/* ── Section layout ──────────────────────────────────────────── */
+.section {
+  position: relative;
+  z-index: 1;
+  padding: 5rem 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+
+/* ── Dark surface card (replaces glassmorphism .glass) ───────── */
+.glass {
+  background: rgba(15, 9, 34, 0.75);
+  border: 1px solid rgba(212, 168, 67, 0.18);
+  border-radius: 2px;
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(212, 168, 67, 0.06);
+}
+
+
+/* ── Parchment card ──────────────────────────────────────────── */
+.parchment-card {
+  background: linear-gradient(160deg, #f0e2c4 0%, var(--color-parchment) 45%, var(--color-parchment-dark) 100%);
+  color: var(--color-ink);
+  border: 1px solid var(--color-gold);
+  border-radius: 2px;
+  padding: 2rem;
+  font-family: var(--font-body);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    inset 0 0 80px rgba(180, 130, 40, 0.08);
+  position: relative;
+}
+
+/* Inner ruling line */
+.parchment-card::before {
+  content: '';
+  position: absolute;
+  inset: 0.625rem;
+  border: 1px solid rgba(91, 62, 16, 0.18);
+  border-radius: 1px;
+  pointer-events: none;
+}
+
+.parchment-card h2,
+.parchment-card h3,
+.parchment-card p  { color: var(--color-ink); }
+
+.parchment-card .reading-prose p   { margin-bottom: 1rem; line-height: 1.85; }
+.parchment-card .reading-prose h3  { color: var(--color-ink-light); font-family: var(--font-display); }
+
+/* ── Scroll card — medieval parchment scroll ─────────────────── */
+.scroll-card {
+  background: linear-gradient(160deg, #f0e2c4 0%, var(--color-parchment) 45%, #e8d4a8 100%);
+  color: var(--color-ink);
+  border-left: 1px solid rgba(91, 62, 16, 0.35);
+  border-right: 1px solid rgba(91, 62, 16, 0.35);
+  border-radius: 0;
+  padding: 0 2rem 0;
+  font-family: var(--font-body);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.45),
+    inset 0 0 80px rgba(180, 130, 40, 0.08),
+    4px 0 8px rgba(0, 0, 0, 0.12),
+    -4px 0 8px rgba(0, 0, 0, 0.12);
+  position: relative;
+}
+
+/* Top roller */
+.scroll-card::before {
+  content: '';
+  display: block;
+  width: calc(100% + 2px);
+  margin-left: -1px;
+  height: 20px;
+  background: linear-gradient(to bottom, #6b4a10 0%, #c8922a 25%, var(--color-gold) 50%, #c8922a 75%, #6b4a10 100%);
+  border-top: 2px solid rgba(60, 38, 8, 0.7);
+  border-bottom: 2px solid rgba(60, 38, 8, 0.5);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 220, 100, 0.35);
+  margin-bottom: 1.75rem;
+}
+
+/* Bottom roller */
+.scroll-card::after {
+  content: '';
+  display: block;
+  width: calc(100% + 2px);
+  margin-left: -1px;
+  height: 20px;
+  background: linear-gradient(to bottom, #6b4a10 0%, #c8922a 25%, var(--color-gold) 50%, #c8922a 75%, #6b4a10 100%);
+  border-top: 2px solid rgba(60, 38, 8, 0.5);
+  border-bottom: 2px solid rgba(60, 38, 8, 0.7);
+  box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.35), inset 0 -1px 0 rgba(255, 220, 100, 0.3);
+  margin-top: 1.75rem;
+}
+
+.scroll-card h2,
+.scroll-card h3,
+.scroll-card p  { color: var(--color-ink); }
+
+.scroll-card .reading-prose p   { margin-bottom: 1rem; line-height: 1.85; }
+.scroll-card .reading-prose h3  { color: var(--color-ink-light); font-family: var(--font-display); }
+
+/* ── Button: celestial (new canonical) ───────────────────────── */
+.btn-celestial {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.65rem 2rem;
+  background: transparent;
+  border: 1px solid var(--color-gold);
+  border-radius: 2px;
+  color: var(--color-gold);
+  font-family: var(--font-label);
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  font-variant: small-caps;
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+  text-decoration: none;
+}
+
+.btn-celestial:hover {
+  background: var(--color-gold);
+  color: var(--color-void);
+  box-shadow: 0 0 16px rgba(212, 168, 67, 0.35);
+}
+
+.btn-celestial:active {
+  box-shadow: none;
+  opacity: 0.9;
+}
+
+
+/* ── Button: cosmic (backward-compat, now maps to celestial style) */
+.btn-cosmic {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.65rem 2rem;
+  background: transparent;
+  border: 1px solid var(--color-gold);
+  border-radius: 2px;
+  color: var(--color-gold);
+  font-family: var(--font-label);
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  font-variant: small-caps;
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+  text-decoration: none;
+}
+
+.btn-cosmic:hover {
+  background: var(--color-gold);
+  color: var(--color-void);
+  box-shadow: 0 0 16px rgba(212, 168, 67, 0.35);
+}
+
+.btn-cosmic:active { opacity: 0.9; }
+
+/* Gold fill variant */
+.btn-gold {
+  background: var(--color-gold);
+  color: var(--color-void);
+  border-color: var(--color-gold);
+}
+
+.btn-gold:hover {
+  background: var(--color-gold-pale);
+  border-color: var(--color-gold-pale);
+  color: var(--color-void);
+  box-shadow: 0 0 20px rgba(212, 168, 67, 0.45);
+}
+
+
+/* ── Input fields ────────────────────────────────────────────── */
+.input-cosmic {
+  width: 100%;
+  padding: 0.65rem 0.9rem;
+  background: rgba(10, 6, 24, 0.7);
+  border: 1px solid rgba(212, 168, 67, 0.22);
+  border-radius: 2px;
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.input-cosmic:focus {
+  border-color: var(--color-gold);
+  box-shadow: 0 0 0 2px rgba(212, 168, 67, 0.12);
+}
+
+.input-cosmic::placeholder {
+  color: var(--color-muted);
+  font-style: italic;
+}
+
+/* Select arrow colour */
+.input-cosmic option {
+  background: var(--color-void-deep);
+  color: var(--color-text);
+}
+
+
+/* ── Divider — quill stroke ornament ────────────────────────── */
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 2rem 0;
+  border: none;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(212, 168, 67, 0.45), transparent);
+}
+
+.divider::after {
+  /* mirror — gradient goes the other way */
+  background: linear-gradient(270deg, transparent, rgba(212, 168, 67, 0.45), transparent);
+}
+
+/* Optional: wrap divider in a span to show the ornament glyph */
+.divider-ornament {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 2rem 0;
+}
+
+.divider-ornament::before,
+.divider-ornament::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(212, 168, 67, 0.3);
+}
+
+.divider-ornament > span {
+  color: var(--color-gold);
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  font-family: var(--font-label);
+  white-space: nowrap;
+}
+
+
+/* ── Constellation loader ────────────────────────────────────── */
+.constellation-loader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 2.5rem 0;
+}
+
+.constellation-loader p {
+  font-family: var(--font-label);
+  font-variant: small-caps;
+  letter-spacing: 0.15em;
+  color: rgba(212, 168, 67, 0.6);
+  font-size: 0.8rem;
+}
+
+/* Lines draw in and fade out in sequence */
+.constellation-loader line {
+  stroke: var(--color-gold);
+  stroke-width: 0.6;
+  stroke-dasharray: 80;
+  stroke-dashoffset: 80;
+  animation: line-draw 2.8s ease-in-out infinite;
+  opacity: 0;
+}
+
+.constellation-loader line:nth-child(1) { animation-delay: 0.0s; }
+.constellation-loader line:nth-child(2) { animation-delay: 0.2s; }
+.constellation-loader line:nth-child(3) { animation-delay: 0.4s; }
+.constellation-loader line:nth-child(4) { animation-delay: 0.6s; }
+.constellation-loader line:nth-child(5) { animation-delay: 0.8s; }
+.constellation-loader line:nth-child(6) { animation-delay: 1.0s; }
+.constellation-loader line:nth-child(7) { animation-delay: 1.2s; }
+.constellation-loader line:nth-child(8) { animation-delay: 1.4s; }
+
+@keyframes line-draw {
+  0%   { stroke-dashoffset: 80; opacity: 0; }
+  20%  { opacity: 0.5; }
+  50%  { stroke-dashoffset: 0;  opacity: 0.5; }
+  80%  { opacity: 0.15; }
+  100% { stroke-dashoffset: -80; opacity: 0; }
+}
+
+/* Dots pulse with glow */
+.constellation-dot {
+  fill: var(--color-gold);
+  animation: dot-pulse 2s ease-in-out infinite;
+}
+
+@keyframes dot-pulse {
+  0%, 100% { opacity: 0.25; filter: drop-shadow(0 0 0px var(--color-gold)); }
+  50%       { opacity: 1;    filter: drop-shadow(0 0 4px var(--color-gold)); }
+}
+
+
+/* ── Reading prose ───────────────────────────────────────────── */
+.reading-prose p     { margin-bottom: 1rem; line-height: 1.85; }
+.reading-prose h3    { color: var(--color-gold); margin: 1.5rem 0 0.5rem; font-size: 1.05rem; }
+
+
+/* ── Zodiac wheel pulse ──────────────────────────────────────── */
+.wheel-ring {
+  animation: pulse-ring 4s ease-in-out infinite;
+}
+
+@keyframes pulse-ring {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50%       { opacity: 0.7; transform: scale(1.04); }
+}

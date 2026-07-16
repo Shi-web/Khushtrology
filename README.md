@@ -2,7 +2,7 @@
 
 An astrology web app that computes real natal charts with the Swiss Ephemeris and generates AI-powered readings. Readings are free — there's an optional donation to support the project.
 
-**Live demo**: _(coming soon)_ · **Contact**: [khushigauli@gmail.com](mailto:khushigauli@gmail.com)
+**Live demo**: [khushtrology.vercel.app](https://khushtrology.vercel.app) · **Contact**: [khushigauli@gmail.com](mailto:khushigauli@gmail.com)
 
 ## About this project
 
@@ -20,7 +20,7 @@ Khushtrology is a passion project. I've been fascinated by astrology since middl
 2. **AI Reading** — choose a reading type (Natal Overview, Love & Relationships, Career & Purpose, or Spiritual Path) and get a personalised ~300–400 word interpretation powered by Groq (Llama 3.3 70B), displayed on a medieval parchment scroll card. Prompts are engineered to cite exact placements — no generic sun-sign filler.
 3. **Accounts & saved charts** — sign up via Supabase auth, save charts to your account, and reload them later with their readings intact (readings persist per-chart in a `jsonb` column). Includes a full password-reset email flow.
 4. **Today's Sky** — for logged-in users: today's transiting planets placed into your natal houses, a most-activated-house callout, and an optional AI transit reading that refreshes daily.
-5. **Donate** — optional tip-jar donation via Stripe Checkout with a signed, idempotent webhook; running total shown on the donate page.
+5. **Donate** — optional tip-jar donation via Stripe Checkout with a signed, idempotent webhook; running total shown on the donate page. The live site runs in Stripe demo mode — try the full flow with test card `4242 4242 4242 4242`, no real charges.
 
 ## Technical highlights
 
@@ -119,8 +119,8 @@ The donation flow uses Stripe Checkout and requires a running webhook listener s
   - URL: `https://<your-railway-app>.railway.app/donate/webhook`
   - Event: `checkout.session.completed`
 - [ ] Copy the endpoint's signing secret into Railway as `STRIPE_WEBHOOK_SECRET`
-- [ ] Switch `STRIPE_SECRET_KEY` to your live key (`sk_live_...`)
-- [ ] Set `FRONTEND_URL` to your Vercel production URL
+- [ ] Keep `STRIPE_SECRET_KEY` on the test key (`sk_test_...`) — the deployed site intentionally runs Stripe in demo mode, so no real payments are possible
+- [ ] Set `FRONTEND_URL` to your Vercel production URL (exact origin, no trailing slash — it's the CORS allowlist)
 
 ---
 

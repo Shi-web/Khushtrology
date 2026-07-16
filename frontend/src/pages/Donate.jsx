@@ -60,7 +60,7 @@ export default function Donate() {
           </p>
           {total !== null && (
             <p className="text-sm text-purple-400 mt-4">
-              ✦ <span className="text-yellow-400 font-medium">${(total / 100).toFixed(2)}</span> raised so far
+              ✦ <span className="text-yellow-400 font-medium">${(total / 100).toFixed(2)}</span> raised in demo donations
             </p>
           )}
         </div>
@@ -134,6 +134,13 @@ export default function Donate() {
 
           <p className="text-xs text-purple-500">
             Secured by Stripe · One-time donation
+          </p>
+
+          <p className="text-xs text-amber-300/80 border border-amber-400/30 bg-amber-400/5 p-3 mt-4">
+            ✦ Demo mode — payments run on Stripe&apos;s test system, so no real money
+            changes hands. To try the flow, use card{' '}
+            <span className="font-mono text-amber-200">4242 4242 4242 4242</span>{' '}
+            with any future expiry and CVC. Real cards will be declined.
           </p>
         </div>
       </div>

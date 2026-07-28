@@ -10,7 +10,6 @@
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0"
   },
   "dependencies": {
-    "@stripe/stripe-js": "^4.0.0",
     "@supabase/supabase-js": "^2.45.0",
     "axios": "^1.7.2",
     "gsap": "^3.12.5",
